@@ -28,14 +28,17 @@ platform = Canvas(window, width = cols*Width, height = rows*Width)
 platform.pack()
 
 def render_grid():
+    #First fill the canvas with black color
     global rows, cols, Width, player, end
     for i in range(cols):
         for j in range(rows):
             platform.create_rectangle(i*Width, j*Width,(i+1)*Width, (j+1)*Width, fill="black", width = 1)
-
+            
+    #Color the start cell and the end cell with blue and red
     platform.create_rectangle(player[0]*Width, player[1]*Width,(player[0]+1)*Width, (player[1]+1)*Width, fill="blue", width = 1)
     platform.create_rectangle(end[0]*Width, end[1]*Width,(end[0]+1)*Width, (end[1]+1)*Width, fill="red", width = 1)
 
+    #For all the walls in the list, color them with black
     for (i,j) in Walls:
         platform.create_rectangle(i*Width, j*Width,(i+1)*Width, (j+1)*Width, fill="black", width = 1)
 
@@ -43,6 +46,7 @@ render_grid()
 
 def render_path(path):
     global Width
+    #Create the rectangles from start to end, now that you know the path co-ordinates, travel the path list
     for (i,j) in path:
         platform.create_rectangle(i*Width, j*Width,(i+1)*Width, (j+1)*Width, fill="blue", width = 1)
         time.sleep(0.1)

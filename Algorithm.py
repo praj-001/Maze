@@ -89,16 +89,16 @@ startB = Board.player
 finishB = Board.end
 barriersB = Board.Walls
 field = Field(len=lenB, start=startB, finish=finishB, barriers=barriersB)
-field.emit()  # processes the maze
-path = field.get_path()
-path.reverse()
+field.emit()  # Apply algo and store the path in the queue
+path = field.get_path() # Get the path from the queue elements
+path.reverse()  # Reverse the path to get the path from start to end
 
 def run():
     global path
     for i in range(lenB):
         for j in range(lenB):
             if field[i][j] > 0:
-                Board.render_block((i, j), "gray" + str(100 - field[i][j]))  # send gradient color information
+                Board.render_block((i, j), "gray" + str(100 - field[i][j]))  # Color the traversable path with gray color
                 time.sleep(0.01)
     Board.render_block(finishB, "red")  # mark the end point
     Board.render_path(path)
